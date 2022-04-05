@@ -8,19 +8,7 @@ import Finish from "./pages/Finish";
 const App = () => {
   return (
     <div>
-      <Route path="/" exact>
-        <div className="header">
-          <h1>Michal's Quiz </h1>
-
-          <Welcome />
-        </div>
-      </Route>
-      <Route path="/q">
-        <Questions />
-      </Route>
-      <Route path="/F">
-        <Finish />
-      </Route>
+      <h1>hello</h1>
     </div>
   );
 };
