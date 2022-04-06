@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Questions.css";
+import Timer from "../components/Timer";
 
 import DisplayQuestion from "../components/DisplayQuestion";
 
@@ -13,10 +14,18 @@ const Questions = () => {
   const [currentQuestionIndx, setCurrentQuestionIndx] = useState(0);
   const [questionsFromAPI, setQuestionsFromAPI] = useState([]);
   const [gameOver, setGameOver] = useState(false);
+  //const [reset, setReset] = useState(false);
+  const [key, setKey] = useState(0);
+  //const [revealAnswers, setRevealAnswers] = useState(false);
 
   //let newIndex = 0;
 
   /*Helper functions*/
+  /* 
+  let onTimesup = () => {
+    setCurrentQuestionIndx(currentQuestionIndx + 1);
+    setReset(true); //reset
+  };*/
 
   const fetchData = () => {
     return fetch(questionsAPI)
@@ -41,11 +50,22 @@ const Questions = () => {
     } else {
       /* Incorrect answer :*/
       console.log("Incorrect");
+      setCurrentQuestionIndx(currentQuestionIndx + 1);
     }
+    //reset timer
+    setKey((prevKey) => prevKey + 1);
 
     if (newIndex >= 3) {
       setGameOver(true);
     }
+  };
+
+  const resetTimer = () => {
+    setKey((prevKey) => prevKey + 1);
+  };
+
+  const moveToNext = () => {
+    setCurrentQuestionIndx(currentQuestionIndx + 1);
   };
 
   /*rendering*/
@@ -55,11 +75,20 @@ const Questions = () => {
         {gameOver ? (
           <h1>your score is {currentScore}</h1>
         ) : (
-          <DisplayQuestion
-            data={questionsFromAPI[currentQuestionIndx]}
-            handler={answerHandler}
-            score={currentScore}
-          ></DisplayQuestion>
+          <div>
+            <div>
+              <Timer reset={key} resetHandler={resetTimer} move={moveToNext} />
+            </div>
+            <div className="Questions">
+              <h2>Questions</h2>
+
+              <DisplayQuestion
+                data={questionsFromAPI[currentQuestionIndx]}
+                handler={answerHandler}
+                score={currentScore}
+              ></DisplayQuestion>
+            </div>
+          </div>
         )}
       </div>
     );

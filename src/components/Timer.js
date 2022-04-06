@@ -1,23 +1,40 @@
-import React, { useState } from "react";
+import React from "react";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 import "./Timer.css";
-const Timer = () => {
-  const [seconds, setSeconds] = useState(0);
-  const [isActive, setIsActive] = useState(false);
+
+const Timer = (props) => {
+  return (
+    <div className="App">
+      <div className="timer-wrapper">
+        <CountdownCircleTimer
+          key={props.reset}
+          isPlaying
+          duration={10}
+          colors={"lightblue"}
+          onComplete={() => {
+            props.move();
+            props.resetHandler();
+          }}
+        >
+          {TimerHelper}
+        </CountdownCircleTimer>
+      </div>
+    </div>
+  );
+};
+
+const TimerHelper = ({ remainingTime }) => {
+  /*
+  if (remainingTime === 0) {
+    return <div className="timer">Too late...</div>;
+  }*/
 
   return (
-    <div className="app">
-      <div className="time">{seconds}s</div>
-      <div className="row">
-        <button
-          className={`button button-primary button-primary-${
-            isActive ? "active" : "inactive"
-          }`}
-        >
-          {isActive ? "Pause" : "Start"}
-        </button>
-        <button className="button">Reset</button>
-      </div>
+    <div className="timer">
+      <div className="text">Remaining</div>
+      <div className="value">{remainingTime}</div>
+      <div className="text">seconds</div>
     </div>
   );
 };
