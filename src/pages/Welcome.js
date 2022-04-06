@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Welcome = () => {
   return (
@@ -7,6 +8,7 @@ const Welcome = () => {
       <p>Category</p>
       <p>difficultly</p>
       <p>type</p>
+      <Link to="/q"> START QUIZ</Link>
     </div>
   );
 };
