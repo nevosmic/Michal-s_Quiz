@@ -3,6 +3,14 @@ import Card from "../UI/Card";
 import "./DisplayQuestion.css";
 
 const DisplayQuestion = (props) => {
+  /*I used dangerouslySetInnerHTML to fix the quotes gibberish problem */
+
+  // shuffle the answers
+  const shuffledAnswers = [
+    props.data.correct_answer,
+    ...props.data.incorrect_answers,
+  ].sort(() => Math.random() - 0.5);
+
   return (
     <div className="Questions">
       <h2>Questions</h2>
@@ -17,27 +25,27 @@ const DisplayQuestion = (props) => {
         />
         <ul>
           <li
-            onClick={() => props.handler(true)}
+            onClick={() => props.handler(shuffledAnswers[0])}
             dangerouslySetInnerHTML={{
-              __html: props.data.correct_answer,
+              __html: shuffledAnswers[0],
             }}
           ></li>
           <li
-            onClick={() => props.handler(false)}
+            onClick={() => props.handler(shuffledAnswers[1])}
             dangerouslySetInnerHTML={{
-              __html: props.data.incorrect_answers[0],
+              __html: shuffledAnswers[1],
             }}
           ></li>
           <li
-            onClick={() => props.handler(false)}
+            onClick={() => props.handler(shuffledAnswers[2])}
             dangerouslySetInnerHTML={{
-              __html: props.data.incorrect_answers[1],
+              __html: shuffledAnswers[2],
             }}
           ></li>
           <li
-            onClick={() => props.handler(false)}
+            onClick={() => props.handler(shuffledAnswers[3])}
             dangerouslySetInnerHTML={{
-              __html: props.data.incorrect_answers[2],
+              __html: shuffledAnswers[3],
             }}
           ></li>
         </ul>

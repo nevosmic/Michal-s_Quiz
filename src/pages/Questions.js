@@ -3,9 +3,6 @@ import "./Questions.css";
 
 import DisplayQuestion from "../components/DisplayQuestion";
 
-//TODO  shuffledAnswers
-/*I used dangerouslySetInnerHTML to fix the quotes gibberish problem */
-
 const questionsAPI = "https://opentdb.com/api.php?amount=100";
 
 //const Button = ({answer}) => (<button>{questionsFromAPI[currentQuestion].correct_answer}</button>);
@@ -13,14 +10,11 @@ const questionsAPI = "https://opentdb.com/api.php?amount=100";
 const Questions = () => {
   /*state variables */
   const [currentScore, setCurrentScore] = useState(0);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [currentQuestionIndx, setCurrentQuestionIndx] = useState(0);
   const [questionsFromAPI, setQuestionsFromAPI] = useState([]);
+  const [gameOver, setGameOver] = useState(false);
 
-  /*shuffledAnswers 
-  const shuffledAnswers = [
-    questionsFromAPI[currentQuestion].correct_answer,
-    ...questionsFromAPI[currentQuestion].incorrect_answers,
-  ].sort(() => Math.random() - 0.5);*/
+  //let newIndex = 0;
 
   /*Helper functions*/
 
@@ -34,31 +28,40 @@ const Questions = () => {
     fetchData();
   }, []);
 
-  const answerHandler = (isCorrect) => {
+  const answerHandler = (answer) => {
+    const newIndex = currentQuestionIndx + 1;
     /* Correct answer : 
     -update score 
     -move to the next question*/
-    console.log(isCorrect);
-    if (isCorrect) {
+    if (answer === questionsFromAPI[currentQuestionIndx].correct_answer) {
       setCurrentScore((prevState) => {
         return prevState + 1;
       });
-      setCurrentQuestion((prevState) => {
-        return prevState + 1;
-      });
+      setCurrentQuestionIndx(currentQuestionIndx + 1);
     } else {
-      /* Correct answer :*/
+      /* Incorrect answer :*/
+      console.log("Incorrect");
+    }
+
+    if (newIndex >= 3) {
+      setGameOver(true);
     }
   };
 
   /*rendering*/
   if (questionsFromAPI.length > 0) {
     return (
-      <DisplayQuestion
-        data={questionsFromAPI[currentQuestion]}
-        handler={answerHandler}
-        score={currentScore}
-      ></DisplayQuestion>
+      <div>
+        {gameOver ? (
+          <h1>your score is {currentScore}</h1>
+        ) : (
+          <DisplayQuestion
+            data={questionsFromAPI[currentQuestionIndx]}
+            handler={answerHandler}
+            score={currentScore}
+          ></DisplayQuestion>
+        )}
+      </div>
     );
   } else {
     return <h2>Loading...</h2>;
