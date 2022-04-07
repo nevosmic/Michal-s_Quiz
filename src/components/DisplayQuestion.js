@@ -7,7 +7,7 @@ const DisplayQuestion = (props) => {
 
   /*Helper functions */
 
-  // shuffle the answers
+  // shuffles the answers
   const shuffledAnswers = [
     props.data.correct_answer,
     ...props.data.incorrect_answers,
@@ -15,7 +15,6 @@ const DisplayQuestion = (props) => {
 
   return (
     <div lassName="Questions">
-      <h1 className="text-green-500">className</h1>
       <Card>
         <h2>current score: {props.score}</h2>
         <h3

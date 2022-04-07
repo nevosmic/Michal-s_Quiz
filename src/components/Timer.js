@@ -8,12 +8,12 @@ const Timer = (props) => {
     <div className="App">
       <div className="timer-wrapper">
         <CountdownCircleTimer
-          key={props.reset}
+          key={props.resetKey}
           isPlaying
           duration={10}
           colors={"lightblue"}
           onComplete={() => {
-            props.move();
+            props.moveHandler();
             props.resetHandler();
           }}
         >

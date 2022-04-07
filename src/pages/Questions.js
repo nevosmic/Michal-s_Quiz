@@ -6,26 +6,14 @@ import DisplayQuestion from "../components/DisplayQuestion";
 
 const questionsAPI = "https://opentdb.com/api.php?amount=100";
 
-//const Button = ({answer}) => (<button>{questionsFromAPI[currentQuestion].correct_answer}</button>);
-
 const Questions = () => {
   /*state variables */
   const [currentScore, setCurrentScore] = useState(0);
   const [currentQuestionIndx, setCurrentQuestionIndx] = useState(0);
   const [questionsFromAPI, setQuestionsFromAPI] = useState([]);
   const [gameOver, setGameOver] = useState(false);
-  //const [reset, setReset] = useState(false);
   const [key, setKey] = useState(0);
   //const [revealAnswers, setRevealAnswers] = useState(false);
-
-  //let newIndex = 0;
-
-  /*Helper functions*/
-  /* 
-  let onTimesup = () => {
-    setCurrentQuestionIndx(currentQuestionIndx + 1);
-    setReset(true); //reset
-  };*/
 
   const fetchData = () => {
     return fetch(questionsAPI)
@@ -65,7 +53,11 @@ const Questions = () => {
   };
 
   const moveToNext = () => {
+    const newIndex2 = currentQuestionIndx + 1;
     setCurrentQuestionIndx(currentQuestionIndx + 1);
+    if (newIndex2 >= 3) {
+      setGameOver(true);
+    }
   };
 
   /*rendering*/
@@ -77,7 +69,11 @@ const Questions = () => {
         ) : (
           <div>
             <div>
-              <Timer reset={key} resetHandler={resetTimer} move={moveToNext} />
+              <Timer
+                resetKey={key}
+                resetHandler={resetTimer}
+                moveHandler={moveToNext}
+              />
             </div>
             <div className="Questions">
               <h2>Questions</h2>
