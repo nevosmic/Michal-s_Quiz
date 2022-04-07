@@ -1,0 +1,25 @@
+.Finish {
+  text-align: center;
+}
+
+button {
+  margin-top: 12px;
+  background-color: rgb(226, 220, 42);
+  padding: 16px;
+  border: 3px solid white;
+  border-radius: 14px;
+  font-size: 20px;
+}
+
+h2 {
+  margin-top: 30px;
+  background-color: darkgray;
+  padding: 16px;
+  border: 3px solid white;
+  border-radius: 14px;
+  font-size: 20px;
+}
+
+.question-text {
+  font-size: 24px;
+}
