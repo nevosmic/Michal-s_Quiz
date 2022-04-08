@@ -1,3 +1,11 @@
+h3 {
+  background-color: rgb(249, 234, 234);
+  padding: 16px;
+  border: 3px solid white;
+  border-radius: 14px;
+  font-size: 15px;
+  color: rgb(6, 6, 36);
+}
 .Questions {
   text-align: center;
 }
@@ -9,16 +17,18 @@ ul {
 
 button {
   margin-top: 12px;
-  background-color: darkgray;
+  background-color: rgb(238, 184, 184);
   padding: 16px;
   border: 3px solid white;
   border-radius: 14px;
   font-size: 20px;
+  color: white;
 }
 li {
   margin-top: 12px;
-  background-color: darkgray;
+  background-color: rgb(238, 184, 184);
   padding: 16px;
+  color: white;
   border: 3px solid white;
   border-radius: 14px;
   font-size: 20px;

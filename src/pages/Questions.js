@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import "./Questions.css";
 import Timer from "../components/Timer";
 import Finish from "./Finish";
-
 import DisplayQuestion from "../components/DisplayQuestion";
-
-//const questionsAPI = "https://opentdb.com/api.php?amount=100";
 
 const Questions = (props) => {
   /*state variables */
@@ -16,7 +13,6 @@ const Questions = (props) => {
   //const [revealAnswers, setRevealAnswers] = useState(false);
 
   const answerHandler = (answer) => {
-    const newIndex = currentQuestionIndx + 1;
     /* Correct answer : 
     -update score 
     -move to the next question*/
@@ -24,18 +20,10 @@ const Questions = (props) => {
       setCurrentScore((prevState) => {
         return prevState + 1;
       });
-      setCurrentQuestionIndx(currentQuestionIndx + 1);
-    } else {
-      /* Incorrect answer :*/
-      console.log("Incorrect");
-      setCurrentQuestionIndx(currentQuestionIndx + 1);
     }
+    moveToNext();
     //reset timer
-    setKey((prevKey) => prevKey + 1);
-
-    if (newIndex >= props.questionsAPI.length) {
-      setGameOver(true);
-    }
+    resetTimer();
   };
 
   const resetTimer = () => {
@@ -45,9 +33,14 @@ const Questions = (props) => {
   const moveToNext = () => {
     const newIndex2 = currentQuestionIndx + 1;
     setCurrentQuestionIndx(currentQuestionIndx + 1);
+
     if (newIndex2 >= props.questionsAPI.length) {
       setGameOver(true);
     }
+  };
+
+  const newQuiz = () => {
+    props.refresh();
   };
 
   const restartQuiz = () => {
@@ -61,7 +54,12 @@ const Questions = (props) => {
   return (
     <div>
       {gameOver ? (
-        <Finish score={currentScore} handler={restartQuiz}></Finish>
+        <Finish
+          score={currentScore}
+          numOfQuestions={props.questionsAPI.length}
+          restartHandler={restartQuiz}
+          newQuizHandler={newQuiz}
+        ></Finish>
       ) : (
         <div>
           <div>
@@ -70,10 +68,11 @@ const Questions = (props) => {
               resetHandler={resetTimer}
               moveHandler={moveToNext}
             />
-          </div>
-          <div className="Questions">
-            <h2>Difficulty: {props.difficulty} </h2>
+
             <DisplayQuestion
+              diff={props.difficulty}
+              index={currentQuestionIndx}
+              numOfQuestions={props.questionsAPI.length}
               data={props.questionsAPI[currentQuestionIndx]}
               handler={answerHandler}
               score={currentScore}

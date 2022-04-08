@@ -10,7 +10,7 @@ const Timer = (props) => {
         <CountdownCircleTimer
           key={props.resetKey}
           isPlaying
-          duration={10}
+          duration={15}
           colors={"lightblue"}
           onComplete={() => {
             props.moveHandler();
