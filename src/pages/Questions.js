@@ -10,6 +10,7 @@ const Questions = (props) => {
   const [currentQuestionIndx, setCurrentQuestionIndx] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [key, setKey] = useState(0);
+  const [isHidden, setHidden] = useState(false);
   //const [revealAnswers, setRevealAnswers] = useState(false);
 
   const answerHandler = (answer) => {
@@ -21,8 +22,8 @@ const Questions = (props) => {
         return prevState + 1;
       });
     }
+    setHidden(false);
     moveToNext();
-    //reset timer
     resetTimer();
   };
 
@@ -70,6 +71,8 @@ const Questions = (props) => {
             />
 
             <DisplayQuestion
+              hidden={isHidden}
+              hiddenHandler={setHidden}
               diff={props.difficulty}
               index={currentQuestionIndx}
               numOfQuestions={props.questionsAPI.length}
