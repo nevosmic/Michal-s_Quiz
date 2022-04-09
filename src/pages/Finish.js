@@ -7,7 +7,7 @@ const Finish = (props) => {
   const score = Math.round((props.score / props.numOfQuestions) * 100);
   let win = false;
 
-  if (score > 50) {
+  if (score > 55) {
     win = true;
   }
 
@@ -31,9 +31,15 @@ const Finish = (props) => {
         </div>
         <br></br>
         {win ? (
-          <img width="200" src={win_img} alt="win" />
+          <div>
+            <h2>Amazing!</h2>
+            <img width="200" src={win_img} alt="win" />
+          </div>
         ) : (
-          <img width="200" src={lose_img} alt="lose" />
+          <div>
+            <h2>You will get better next time..</h2>
+            <img width="200" src={lose_img} alt="lose" />
+          </div>
         )}
       </Card>
     </div>
