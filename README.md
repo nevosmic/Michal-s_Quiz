@@ -2,8 +2,16 @@
 
 This is Michal's Quiz React App :)
 
+This is a quiz with questions that comes From a live database - General knowledge is needed to pass this challenge!
+The questions are from diverse categories.
 
-Welcome
+In this game you will first need to choose a difficulty level : easy/medium/hard
+
+At each round, you will have only 15 seconds to answer the question.
+your qoal is to answer as much questions as possible.
+
+
+Welcome page
 
 ![ScreenShot](screenShots/quiz_welcome.jpg "Welcome")
 
