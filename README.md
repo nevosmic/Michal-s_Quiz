@@ -2,6 +2,8 @@
 
 This is Michal's Quiz React App :)
 
+[Live site](https://magenta-centaur-48abbb.netlify.app)
+
 This is a quiz with questions that comes From a live database - General knowledge is needed to pass this challenge!
 The questions are from diverse categories.
 
